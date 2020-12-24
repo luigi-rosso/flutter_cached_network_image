@@ -26,7 +26,8 @@ Future<ui.Codec> loadAsyncHtmlImage(
         );
       },
     ) as Future<ui.Codec>);
-  } on Exception {
+  } on Exception catch (e, s) {
+    print('loadAsyncHtmlImage error: $e $s');
     return null;
   }
 }
