@@ -13,7 +13,7 @@ Future<ui.Codec> loadAsyncHtmlImage(
 ) async {
   final resolved = Uri.base.resolve(key.url);
 
-  return runZonedGuarded<Future<ui.Codec>>(() async {
+  try {
     return await (ui.webOnlyInstantiateImageCodecFromUrl(
       // ignore: undefined_function
       resolved,
@@ -26,13 +26,7 @@ Future<ui.Codec> loadAsyncHtmlImage(
         );
       },
     ) as Future<ui.Codec>);
-  }, (error, __) {
-    if (error is ProgressEvent) {
-      // Intentionally empty, swallowing ProgressEvent (Flutter Web seems to
-      // throw this ProgressEvent when doing certain operations on an HTTP
-      // request). See https://github.com/flutter/flutter/issues/60239
-    } else {
-      throw error;
-    }
-  });
+  } on Exception {
+    return null;
+  }
 }
