@@ -129,7 +129,8 @@ class CachedNetworkImageProvider
       });
 
       errorListener?.call();
-      rethrow;
+      //rethrow;
+      print('load async error: $e');
     } finally {
       await chunkEvents.close();
     }
