@@ -100,7 +100,8 @@ class CachedNetworkImageProvider
       });
 
       errorListener?.call();
-      rethrow;
+      //rethrow;
+      print('loadAsyncHtmlImage error: $e');
     } finally {
       await chunkEvents.close();
     }
